@@ -1,11 +1,7 @@
 package io.github.matheusproencaz.calcme.desafio.controller.dto;
 
-import io.github.matheusproencaz.calcme.desafio.model.User;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.io.Serial;
 import java.io.Serializable;
 
 public class UserDTO implements Serializable {
