@@ -3,6 +3,7 @@ package io.github.matheusproencaz.calcme.desafio.exception.handler;
 import io.github.matheusproencaz.calcme.desafio.exception.dto.StandardError;
 import io.github.matheusproencaz.calcme.desafio.exception.dto.ValidationError;
 import io.github.matheusproencaz.calcme.desafio.service.exception.EmailAlreadyExistsException;
+import io.github.matheusproencaz.calcme.desafio.service.exception.NotFoundUsersException;
 import org.springframework.data.mongodb.core.MongoDataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,4 +42,10 @@ public class ControllerExceptionHandler {
         StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro de Integridade de Dados!" , e.getLocalizedMessage(), request.getContextPath());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
     }
+
+    @ExceptionHandler(NotFoundUsersException.class)
+    public ResponseEntity<Void> NotFoundUsersException(NotFoundUsersException e, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }

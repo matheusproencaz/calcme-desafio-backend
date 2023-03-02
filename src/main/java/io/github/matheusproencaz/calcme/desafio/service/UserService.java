@@ -4,6 +4,7 @@ import io.github.matheusproencaz.calcme.desafio.controller.dto.UserDTO;
 import io.github.matheusproencaz.calcme.desafio.model.User;
 import io.github.matheusproencaz.calcme.desafio.repositories.UserRepository;
 import io.github.matheusproencaz.calcme.desafio.service.exception.EmailAlreadyExistsException;
+import io.github.matheusproencaz.calcme.desafio.service.exception.NotFoundUsersException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,11 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return repository.findAll();
+        List<User> users = repository.findAll();
+        if (users.size() == 0) {
+            throw new NotFoundUsersException();
+        }
+        return users;
     }
 
     public User findByEmail(String email) {
